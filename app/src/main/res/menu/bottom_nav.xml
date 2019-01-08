@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ic_hospital"
+        android:icon="@drawable/health"
+        android:title="Hospitals">
+
+
+    </item>
+
+    <item
+        android:id="@+id/ic_police"
+        android:icon="@drawable/security"
+        android:title="Police">
+
+
+    </item>
+
+    <item
+        android:id="@+id/ic_food"
+        android:icon="@drawable/ic_food"
+        android:title="Restaurant">
+
+
+    </item>
+
+
+</menu>
