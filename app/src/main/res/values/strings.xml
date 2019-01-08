@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Amity_Hack</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
