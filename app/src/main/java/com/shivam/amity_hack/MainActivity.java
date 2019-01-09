@@ -1,10 +1,10 @@
 package com.shivam.amity_hack;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -86,6 +87,12 @@ public class MainActivity extends AppCompatActivity
                 MainActivity.this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
+        SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(
+                "LOGIN", Context.MODE_PRIVATE);
+        String email = sharedPref.getString("email","null");
+
+
+
         if (perm == PackageManager.PERMISSION_GRANTED) {
             start();
             final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
@@ -102,6 +109,10 @@ public class MainActivity extends AppCompatActivity
             );
         }
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("AIzaSyDX3hbZoOV7ugYSPOcpwc3spUE1m4wwnPY")
+                .requestEmail()
+                .build();
 
 
     }
@@ -274,19 +285,20 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.credits) {
             // Handle the camera action
+            startActivity(new Intent(MainActivity.this,CreditActivity.class));
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.signOut) {
+            SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(
+                    "LOGIN", Context.MODE_PRIVATE);
 
-        } else if (id == R.id.nav_slideshow) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("loggedIn", false);
+            editor.putString("email","null");
+            editor.commit();
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
