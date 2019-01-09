@@ -2,12 +2,12 @@ package com.shivam.amity_hack.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.shivam.amity_hack.MainActivity;
@@ -92,6 +92,12 @@ public class BottomNavigationViewHelper {
                         getNearbyPlacesDatarestaurant.execute(DataTransferrestaurant);
 
                         break;
+
+                    case R.id.safe:
+                        String url = "https://safe-way.herokuapp.com/maps";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        context.startActivity(i);
 
                 }
 

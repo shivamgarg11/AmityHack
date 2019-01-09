@@ -25,5 +25,13 @@
 
     </item>
 
+    <item
+    android:id="@+id/safe"
+    android:icon="@drawable/ic_near_me_black_24dp"
+    android:title="Safe Route">
+
+
+</item>
+
 
 </menu>
