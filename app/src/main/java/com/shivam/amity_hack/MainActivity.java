@@ -1,6 +1,7 @@
 package com.shivam.amity_hack;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -210,9 +212,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         if(id == R.id.emergency){
             //Added by Shivam
             List<String> HelpLineNumbers = new ArrayList<>();
@@ -231,7 +231,30 @@ public class MainActivity extends AppCompatActivity
             mBuilder.setItems(helpLine, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    String selectedText = helpLine[i].toString();
+                    char selectedText = helpLine[i].toString().charAt(0);
+
+                    switch(selectedText){
+
+                        case 'W' :startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "1091", null)));
+                            break;
+
+                        case 'P' :startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "100", null)));
+                            break;
+
+                        case 'H' :startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "102", null)));
+                            break;
+
+                        case 'F' :startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "101", null)));
+                            break;
+
+                        case 'A' :startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "102", null)));
+                            break;
+
+                        case 'M' :startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "9278978978", null)));
+                            break;
+                    }
+
+
                 }
             });
 
@@ -241,29 +264,6 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        List<String> HelpLineNumbers = new ArrayList<>();
-        HelpLineNumbers.add("Women's Helpline");
-        HelpLineNumbers.add("Police");
-        HelpLineNumbers.add("Hospital");
-        HelpLineNumbers.add("Fire Department");
-        HelpLineNumbers.add("Ambulance");
-        HelpLineNumbers.add("Men's Helpline");
-
-        final CharSequence[] helpLine = HelpLineNumbers.toArray(new String[HelpLineNumbers.size()]);
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-        mBuilder.setTitle("Helpline Numbers");
-
-        mBuilder.setItems(helpLine, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String selectedText = helpLine[i].toString();
-            }
-        });
-
-        AlertDialog alertDialogObject = mBuilder.create();
-        //Show the dialog
-        alertDialogObject.show();
 
         return super.onOptionsItemSelected(item);
     }
